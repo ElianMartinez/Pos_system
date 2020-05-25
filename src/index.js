@@ -11,6 +11,7 @@ app.use(express.json());
 
 //Routes 
 app.use(require('./routes/product_category'));
+app.use(require('./routes/login'));
 
 //Starting server
 app.listen(app.get('port'), () => {
