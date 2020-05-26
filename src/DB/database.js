@@ -1,29 +1,30 @@
 const mysql = require('mysql');
-var host = "localhost";
-var user = "root";
-var pass = "";
-var db = "pos_system";
+const { promisify } = require('util');
 
-const mysqlConnection = mysql.createConnection({
-    host : host,
-    user: user,
-    password: pass,
-    database : db
-});
-try{
-mysqlConnection.connect( (err) => {
-    if(err){
-        console.log(err.sqlMessage);
-        return;
-    }else{
-        console.log('Db is connected');
+const { database } = require('./key');
+
+const pool = mysql.createPool(database);
+
+pool.getConnection((err, connection) => {
+  if (err) {
+    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+      console.error('Database connection was closed.');
     }
+    if (err.code === 'ER_CON_COUNT_ERROR') {
+      console.error('Database has to many connections');
+    }
+    if (err.code === 'ECONNREFUSED') {
+      console.error('Database connection was refused');
+    }
+  }
+
+  if (connection) connection.release();
+  console.log('DB is Connected');
+
+  return;
 });
 
-}
-catch(ee){
-    console.log(ee);
-}
+// Promisify Pool Querys
+pool.query = promisify(pool.query);
 
-
-module.exports = mysqlConnection;
+module.exports = pool;
