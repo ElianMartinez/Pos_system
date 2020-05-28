@@ -14,6 +14,7 @@ router.get('/', (req,res) => {
 
 router.use('/product_category',product_categoryRouter);
 router.use('/login',loginRouter);
+router.use('/employes',employesRouter);
 
 
 
