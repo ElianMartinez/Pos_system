@@ -3,8 +3,8 @@ const loginModel = new LoginModel();
 
 
 const login = async (req, res) => {
-  const { user, pass } = req.body;
-
+ const { user, pass } = req.body;
+  
   if (user != undefined && pass != undefined) {
    
     const datos = await loginModel.loginTry(user,pass);

@@ -1,5 +1,6 @@
 const db = require("../DB/database");
 
+
 module.exports =  class LogController 
 {
     AddLog(id,accion){

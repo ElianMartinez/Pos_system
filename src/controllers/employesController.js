@@ -11,4 +11,28 @@ const show = async (req, res) => {
     });
     
 }
-module.exports = { show };
+
+const create = (req , res) => {
+  
+    //agarro los datos 
+  const dato = req.body;
+  console.log(dato);
+
+
+  //paso los datos por la funcion 
+ // const datos = await employesModel.Create();
+
+
+  //respuesta
+  res.json({
+    res:"ok",
+    data:dato
+});
+
+  
+
+
+} 
+
+
+module.exports = { show, create };
