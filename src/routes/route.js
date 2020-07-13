@@ -1,9 +1,10 @@
 const {Router} = require("express");
 const router = Router();
 
-const product_categoryRouter = require('./product_category'); 
+
 const loginRouter = require('./login'); 
 const employesRouter = require('./employes'); 
+const productRouter = require('./product'); 
 
 router.get('/', (req,res) => {
     res.json({
@@ -12,9 +13,10 @@ router.get('/', (req,res) => {
     });
 });
 
-router.use('/product_category',product_categoryRouter);
+
 router.use('/login',loginRouter);
 router.use('/employees',employesRouter);
+router.use('/product',productRouter);
 
 
 

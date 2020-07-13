@@ -8,3 +8,4 @@ module.exports =  class LogController
         db.query(query);
     }
 }
+
