@@ -6,7 +6,7 @@ const login = async (req, res) => {
  const { User, Pass } = req.body;
  
   if (User != undefined && Pass != undefined) {
-
+    console.log("Entro alguien");
     const datos = await loginModel.loginTry(User,Pass);
     
     if(datos != ""){
