@@ -87,7 +87,7 @@ module.exports = class ProductModel {
     try {
       //verificar si no se repite la jerarquia
       var ve = await this.verificar_j2(data);
-      console.log(ve);
+     
       if (ve.length > 0) {
         return "hay otro";
       } else {           
