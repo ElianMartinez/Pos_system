@@ -20,3 +20,15 @@ app.listen(app.get('port'), () => {
     console.log("server on port 5500");
     
 });
+
+const mysqlDump = require('mysql-backup');
+var fs = require('fs');
+ 
+mysqlDump({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'pos_system',
+}).then(dump => {
+    fs.writeFileSync('test.sql', dump); // Create data.sql file with dump result
+})

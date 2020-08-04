@@ -5,11 +5,12 @@
   "main": "index.js",
   "dependencies": {
     "express": "^4.17.1",
-    "express-fileupload": "^1.1.7-alpha.3",
+    "express-fileupload": "^1.1.9",
     "mysql": "^2.18.1",
+    "mysql-backup": "^1.0.0",
     "nodemon": "^2.0.4",
     "quick-local-ip": "^1.0.7",
-    "uuid": "^8.2.0"
+    "uuid": "^8.3.0"
   },
   "devDependencies": {},
   "scripts": {

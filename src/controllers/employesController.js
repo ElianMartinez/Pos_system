@@ -21,24 +21,7 @@ const create = async (req, res) => {
   var datos = req.body;
  console.log(datos);
 
-    
-//   //paso los datos por la funcion
-//    //const resultado = await employesModel.Create(datos);
 
-//    if(resultado == "ECONNREFUSED"){
-
-//    }else{
-//        if(resultado == "error"){
-//             //aqui dio error la base de datos
-//        }else{
-
-//             res.json({
-//              res: "ok",
-//              data: resultado,
-//             });
-//        }
-    
-//    }
 
   //respuesta
   res.json({
