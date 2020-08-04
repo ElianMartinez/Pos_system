@@ -27,7 +27,7 @@ const cron = require('node-cron');
 var a = 0;
 cron.schedule('10 13 * * 7-7',() => {
     
-    mysqlDump({
+    mysqlDump({ 
         host: 'localhost',
         user: 'root',
         password: '',
