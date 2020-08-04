@@ -22,13 +22,23 @@ app.listen(app.get('port'), () => {
 });
 
 const mysqlDump = require('mysql-backup');
-var fs = require('fs');
- 
-mysqlDump({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'pos_system',
-}).then(dump => {
-    fs.writeFileSync('test.sql', dump); // Create data.sql file with dump result
+const fs = require('fs');
+const cron = require('node-cron');
+var a = 0;
+cron.schedule('10 13 * * 7-7',() => {
+    
+    mysqlDump({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'pos_system',
+        tables:['customer','product','presentation','logs'], // only these tables
+        where: {'customer': '','product':'','presentation':'','logs':''}, // Only test players with id < 1000
+        ifNotExist:true, // Create table if not exist
+    }).then(dump => {
+        
+        fs.writeFileSync('./backup/test.sql', dump); // Create data.sql file with dump result
+    
+    })
 })
+ 
