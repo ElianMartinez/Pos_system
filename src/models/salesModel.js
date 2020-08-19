@@ -1,5 +1,6 @@
 const bd = require("../DB/database");
 const LogController = require("../controllers/logController");
+const e = require("express");
 const logController = new LogController();
 module.exports = class SalesModel
 {
@@ -50,5 +51,27 @@ module.exports = class SalesModel
         }
         
         return rpta;
+    }
+
+    async AddSalesDetail(data){
+       var rpta;
+        try {
+            var rpta;
+            var query = `call AddSaleDetail('${data.id_v}','${data.id_p}',${data.cantidad},${data.descuento}) `;
+            const datos = await bd.query(query);
+            rpta = true;  
+        }catch(err){
+            rpta = err;
+        }
+    }
+
+    async UpdateSale(data){
+        var rpta;
+        try{
+            resultado = await bd.query(`call  UpdateSales('${data.code_sales}',${data.total_ganancias},${data.total_pay}, ${data.id_payment_method}, ${data.id_customer})`);
+            rpta = true;
+        }catch(err){
+            rpta = err;
+        }
     }
 }

@@ -47,4 +47,43 @@ const DeleteSale = async (req, res) => {
     }
 };
 
-module.exports = { NewSale , DeleteSale};
+const AddSDetail = async (req,res) => {
+
+    if(req.body != ""){
+        let data = req.body;
+       let ress = await salesModel.AddSalesDetail(data);
+        if(ress == true){
+            res.json({
+                "res":"ok",
+                "data":""
+            });
+        }else{
+            res.json({
+                "res":"ok",
+                "data":ress
+            });
+        }
+
+    }
+
+}
+
+    const UpdateSales = async (req,res) =>
+    {   let data = req.body;
+        if(data != ""){
+           let resul = await salesModel.UpdateSale(data);
+           if(resul){
+                res.json({
+                    "res":"ok",
+                    "data":""
+                });
+           }else{
+               res.json({
+                   "res":"error",
+                   "data":resul
+               });
+           }
+        }
+    }
+
+module.exports = { NewSale , DeleteSale, AddSDetail, UpdateSales };

@@ -6,14 +6,18 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-fileupload": "^1.1.9",
+    "gifsicle": "^5.1.0",
     "mysql": "^2.18.1",
     "mysql-backup": "^1.0.0",
     "node-cron": "^2.0.3",
     "nodemon": "^2.0.4",
+    "pngquant-bin": "^6.0.0",
     "quick-local-ip": "^1.0.7",
     "uuid": "^8.3.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "compress-images": "^1.9.3"
+  },
   "scripts": {
     "start": "nodemon src/index.js"
   },

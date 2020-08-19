@@ -273,10 +273,25 @@ const ShowPre = async (req,res) => {
 
 const buscarProducts = async (req,res) => {
   const name = req.params.name;
+  
 
   if(name != null){
-    var resul = await productModel.BuscarProducts(name);
-   
+
+    const arr = name.split(' ');
+    var string1 = "";
+    var cont = 0;
+    while(cont < arr.length){
+      if(cont > 0){
+        string1 = string1 + "and p2.name like '%"+arr[cont]+"%' ";
+      }else{
+        string1 = string1 + "p2.name like '%"+arr[cont]+"%' ";
+
+      }
+      cont++;
+    }
+    
+    var resul = await productModel.BuscarProducts(string1);
+  
      res.json({
        res:"ok",
        data:resul
