@@ -207,7 +207,7 @@ module.exports = class ProductModel {
           resul = await bd.query(sql);
         }else{
          var sql = ` Select   p2.name as Nombre, p.format as Presentacion ,p.num_hierarchy as jerarquia, p.no_unit, p.cantidad as Cantidad, p.price_shopping as 'Precio Compra', p.price_sales_detail as 'Precio Colmado', p.price_sales_mayor as 'Precio Venta Mayor', p.limit_unit, p.image as Imagen, p.bar_code, p.id_product, p.id_presentation 
-         from presentation p, product p2 where ${data} and p.id_product = p2.id_product and p.state =1 order by p2.name asc limit 35`;
+         from presentation p, product p2 where ${data} and p.id_product = p2.id_product and p.state =1 order by p2.name asc `;
          resul = await bd.query(sql);
       }
      

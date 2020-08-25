@@ -73,5 +73,6 @@ module.exports = class SalesModel
         }catch(err){
             rpta = err;
         }
+        return rpta;
     }
 }

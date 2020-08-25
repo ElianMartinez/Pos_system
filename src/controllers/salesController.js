@@ -70,8 +70,10 @@ const AddSDetail = async (req,res) => {
 
     const UpdateSales = async (req,res) =>
     {   let data = req.body;
+        console.log(data);
         if(data != ""){
            let resul = await salesModel.UpdateSale(data);
+           console.log(resul);
            if(resul){
                 res.json({
                     "res":"ok",
