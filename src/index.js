@@ -2,8 +2,10 @@ const express =  require('express');
 const fileUpload = require('express-fileupload');
 const morgan = require("morgan");
 
+
+
 const app = express();
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 //settings 
 app.set("port", 5500);
 
@@ -21,6 +23,7 @@ app.listen(app.get('port'), () => {
     console.log("server on port 5500");
     
 });
+
 
 
 

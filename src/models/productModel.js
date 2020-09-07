@@ -199,19 +199,22 @@ module.exports = class ProductModel {
     }
   }
 
-  async BuscarProducts(data){
+  async BuscarProducts(data,cont){
     try{
       var resul;
-      if(data == null){
-          var sql = "Select p.image, p2.name , p.format,p.num_hierarchy, p.no_unit, p.cantidad, p.price_shopping, p.price_sales_detail, p.price_sales_mayor, p.limit_unit, p.bar_code, p.id_product from presentation p, product p2 where p.id_product = p2.id_product and p.state = 1 limit 50"
-          resul = await bd.query(sql);
-        }else{
-         var sql = ` Select   p2.name as Nombre, p.format as Presentacion ,p.num_hierarchy as jerarquia, p.no_unit, p.cantidad as Cantidad, p.price_shopping as 'Precio Compra', p.price_sales_detail as 'Precio Colmado', p.price_sales_mayor as 'Precio Venta Mayor', p.limit_unit, p.image as Imagen, p.bar_code, p.id_product, p.id_presentation 
-         from presentation p, product p2 where ${data} and p.id_product = p2.id_product and p.state =1 order by p2.name asc `;
+      var sql;
+      if(cont == 1){
+        sql = "Select * from  product where state = 1";
+      }else{
+        if(data == null){
+          sql = "Select p.image, p2.name , p.format,p.num_hierarchy, p.no_unit, p.cantidad, p.price_shopping, p.price_sales_detail, p.price_sales_mayor, p.limit_unit, p.bar_code, p.id_product from presentation p, product p2 where p.id_product = p2.id_product and p.state = 1";
          resul = await bd.query(sql);
+       }else{
+         sql = ` Select   p2.name as Nombre, p.format as Presentacion ,p.num_hierarchy as jerarquia, p.no_unit, p.cantidad as Cantidad, p.price_shopping as 'Precio Compra', p.price_sales_detail as 'Precio Colmado', p.price_sales_mayor as 'Precio Venta Mayor', p.limit_unit, p.image as Imagen, p.bar_code, p.id_product, p.id_presentation 
+        from presentation p, product p2 where ${data} and p.id_product = p2.id_product and p.state =1 order by p2.name asc `;
+       }
       }
-     
-     
+        resul = await bd.query(sql);
       return resul;
 
     }catch(e){
@@ -223,3 +226,4 @@ module.exports = class ProductModel {
 
 
 };
+

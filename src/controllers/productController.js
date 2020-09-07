@@ -161,10 +161,8 @@ const EditPresenta = async (req, res) => {
       product.image = image;
     }
 
-
     //Guardando en base de datos
 
-    
     var resul = await productModel.EditPrese(product);
     console.log(resul);
     if (resul == "true") {
@@ -273,10 +271,12 @@ const ShowPre = async (req,res) => {
 
 const buscarProducts = async (req,res) => {
   const name = req.params.name;
-  
-
+  var resul;
+  if(name == "all"){
+    
+    resul = await productModel.BuscarProducts("",1);
+  }else{
   if(name != null){
-
     const arr = name.split(' ');
     var string1 = "";
     var cont = 0;
@@ -289,22 +289,20 @@ const buscarProducts = async (req,res) => {
       }
       cont++;
     }
-    
-    var resul = await productModel.BuscarProducts(string1);
-  
+     resul = await productModel.BuscarProducts(string1,2);
+    }else {
+      res.json({
+        res: "No llego",
+        data: "aqui no hay datos",
+      });
+    }
+}
+ 
      res.json({
        res:"ok",
        data:resul
      });
-
-  }else {
-    res.json({
-      res: "No llego",
-      data: "aqui no hay datos",
-    });
-  }
 }
-
 
 const ShowProductosBycode = async (req,res) => {
   const codigo = req.params.codigo;

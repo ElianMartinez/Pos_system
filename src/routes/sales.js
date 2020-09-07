@@ -6,6 +6,10 @@ const salesController = require('../controllers/salesController');
 router.post('/',salesController.NewSale);
 router.post('/delete',salesController.DeleteSale);
 router.post('/addsalesdetail',salesController.AddSDetail);
+router.post('/getSalesDetail',salesController.GetSalesDetai);
 router.post('/updateSale',salesController.UpdateSales);
+router.get('/getSales/:id',salesController.getSales);
+
+
 
 module.exports = router;
