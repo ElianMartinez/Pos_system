@@ -42,4 +42,24 @@ const getDeuda = async (req,res) => {
 
     }
 }
-module.exports = {CreateDeuda,getDeuda};
+
+const UpdateDeuda = async (req,res) => {
+    var id = req.params.id; 
+    if(id != ''){
+        const respuesta = await dModel.UpdateDeuda(id);
+        if(respuesta)
+        {
+            res.json({
+                "res":"ok",
+                "data":"excelente"
+            });
+        }else{
+            res.json({
+                "res":"error",
+                "data":""
+            });
+        
+        }
+    }
+}
+module.exports = {CreateDeuda,getDeuda, UpdateDeuda};

@@ -25,4 +25,17 @@ module.exports = class DeudaModel {
                 return error;
             }
         }
+
+        async UpdateDeuda(id){
+            const sql = `select * from deuda = ${id}`;
+            try{
+                var respuesta = await db.query(sql);
+                 if(respuesta.affectedRows > 0){
+                     console.log("completo");
+                     return true;
+                 }
+            }catch(error){
+                return error;
+            }
+        }
     }    
