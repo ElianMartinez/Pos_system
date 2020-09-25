@@ -1,7 +1,7 @@
 const SalesModel = require("../models/salesModel");
 const salesModel = new SalesModel();
 const moment = require('moment');
-const { parse } = require("uuid");
+
 
 
 const NewSale = async (req, res) => {

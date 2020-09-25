@@ -7,7 +7,7 @@ const morgan = require("morgan");
 const app = express();
 // app.use(morgan("dev"));
 //settings 
-app.set("port", 5500);
+app.set("port", 5501);
 
 //Middlewares 
 app.use(express.json());
@@ -20,7 +20,7 @@ app.use(require('./routes/route'));
 //Starting server
 app.listen(app.get('port'), () => {
 
-    console.log("server on port 5500");
+    console.log("server on port 5501");
     
 });
 

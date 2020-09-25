@@ -1,7 +1,5 @@
-var myip = require("quick-local-ip");
 const ProductModel = require("../models/productModel");
 const productModel = new ProductModel();
-const { v4: uuidv4 } = require("uuid");
 const path = require("path");
 
 
@@ -77,12 +75,11 @@ const CreatePresenta = async (req, res) => {
     if (req.files != null) {
       let sampleFile = req.files.file;
 
-      let nombrefile = uuidv4() + path.extname(sampleFile.name);
+      let nombrefile = getRandomArbitrary(1,999999)+ path.extname(sampleFile.name);
       //ruta donde se guarda la imagen
       sampleFile.mv(`./src/public/images/presentations/${nombrefile}`);
       //nombre de la imagen en la bd
       let image = `files/images/presentations/${nombrefile}`;
-
       product.image = image;
     }else{
       product.image = "files/images/presentations/product.png";
@@ -152,7 +149,7 @@ const EditPresenta = async (req, res) => {
     if (req.files != null) {
       let sampleFile = req.files.file;
 
-      let nombrefile = uuidv4() + path.extname(sampleFile.name);
+      let nombrefile = getRandomArbitrary(1,9999999) + path.extname(sampleFile.name);
       //ruta donde se guarda la imagen
       sampleFile.mv(`./src/public/images/presentations/${nombrefile}`);
       //nombre de la imagen en la bd
@@ -332,6 +329,10 @@ const ShowProductosBycode = async (req,res) => {
   }
 }
 
+
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
 
 
 
