@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-09-2020 a las 17:14:15
+-- Tiempo de generación: 26-09-2020 a las 00:33:36
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.9
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `pos_system`
 --
+CREATE DATABASE IF NOT EXISTS `pos_system` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `pos_system`;
 
 DELIMITER $$
 --
@@ -105,6 +107,12 @@ CREATE TABLE `account` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- RELACIONES PARA LA TABLA `account`:
+--   `id_branch_office`
+--       `branch_offices` -> `id_branch_offices`
+--
+
+--
 -- Volcado de datos para la tabla `account`
 --
 
@@ -145,6 +153,14 @@ CREATE TABLE `asientos` (
   `state` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- RELACIONES PARA LA TABLA `asientos`:
+--   `id_cuentadebe`
+--       `account` -> `id_account`
+--   `id_cuentahaber`
+--       `account` -> `id_account`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -156,6 +172,12 @@ CREATE TABLE `bar_code` (
   `id_presentation_product` int(11) NOT NULL,
   `bar_code` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `bar_code`:
+--   `id_presentation_product`
+--       `presentation` -> `id_presentation`
+--
 
 -- --------------------------------------------------------
 
@@ -171,6 +193,12 @@ CREATE TABLE `branch_offices` (
   `state` tinyint(1) NOT NULL,
   `city` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `branch_offices`:
+--   `id_administrator`
+--       `employe` -> `id_employe`
+--
 
 --
 -- Volcado de datos para la tabla `branch_offices`
@@ -195,6 +223,10 @@ CREATE TABLE `customer` (
   `phone` varchar(100) DEFAULT NULL,
   `state` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `customer`:
+--
 
 --
 -- Volcado de datos para la tabla `customer`
@@ -333,6 +365,10 @@ CREATE TABLE `deuda` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- RELACIONES PARA LA TABLA `deuda`:
+--
+
+--
 -- Volcado de datos para la tabla `deuda`
 --
 
@@ -382,6 +418,14 @@ CREATE TABLE `diary_book` (
   `state` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- RELACIONES PARA LA TABLA `diary_book`:
+--   `id_branch_office`
+--       `branch_offices` -> `id_branch_offices`
+--   `id_employe`
+--       `employe` -> `id_employe`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -400,6 +444,12 @@ CREATE TABLE `employe` (
   `image` varchar(100) DEFAULT NULL,
   `id_branch_offices` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='La tabla almacenara informacion de los empleados, usuarios, y su cargo';
+
+--
+-- RELACIONES PARA LA TABLA `employe`:
+--   `id_branch_offices`
+--       `branch_offices` -> `id_branch_offices`
+--
 
 --
 -- Volcado de datos para la tabla `employe`
@@ -427,6 +477,10 @@ CREATE TABLE `inventory` (
   `state` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- RELACIONES PARA LA TABLA `inventory`:
+--
+
 -- --------------------------------------------------------
 
 --
@@ -439,6 +493,12 @@ CREATE TABLE `logs` (
   `action` varchar(100) NOT NULL,
   `dateTime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `logs`:
+--   `id_employe`
+--       `employe` -> `id_employe`
+--
 
 --
 -- Volcado de datos para la tabla `logs`
@@ -4252,7 +4312,58 @@ INSERT INTO `logs` (`id_log`, `id_employe`, `action`, `dateTime`) VALUES
 (4570, 1, 'Inicio de Sección', '2020-09-23 18:28:09'),
 (4571, 1, 'Se registro una venta', '2020-09-23 18:28:11'),
 (4572, 1, 'Edito una Presentacion de Producto (UNIDAD)', '2020-09-23 18:53:33'),
-(4573, 1, 'Se registro una venta', '2020-09-23 18:53:37');
+(4573, 1, 'Se registro una venta', '2020-09-23 18:53:37'),
+(4574, 1, 'Inicio de Sección', '2020-09-25 12:21:44'),
+(4575, 1, 'Inicio de Sección', '2020-09-25 12:33:23'),
+(4576, 1, 'Inicio de Sección', '2020-09-25 12:34:01'),
+(4577, 1, 'Edito una Presentacion de Producto (PAQUETE )', '2020-09-25 12:37:47'),
+(4578, 1, 'Regristró un nuevo Producto (AUYAMA)', '2020-09-25 12:38:58'),
+(4579, 1, 'Regristró una nueva Presentacion de Producto (LIBRA)', '2020-09-25 12:39:44'),
+(4580, 1, 'Inicio de Sección', '2020-09-25 12:44:04'),
+(4581, 1, 'Edito una Presentacion de Producto (LIBRA)', '2020-09-25 12:45:06'),
+(4582, 1, 'Inicio de Sección', '2020-09-25 12:56:59'),
+(4583, 1, 'Inicio de Sección', '2020-09-25 14:18:21'),
+(4584, 1, 'Edito una Presentacion de Producto (LIBRA)', '2020-09-25 14:24:14'),
+(4585, 1, 'Se registro una venta', '2020-09-25 14:29:45'),
+(4586, 1, 'Se registro una venta', '2020-09-25 14:49:26'),
+(4587, 1, 'Inicio de Sección', '2020-09-25 14:59:33'),
+(4588, 1, 'Inicio de Sección', '2020-09-25 15:03:45'),
+(4589, 1, 'Inicio de Sección', '2020-09-25 15:19:31'),
+(4590, 1, 'Edito una Presentacion de Producto (UNIDAD)', '2020-09-25 15:22:51'),
+(4591, 1, 'Edito una Presentacion de Producto (LIBRA)', '2020-09-25 15:24:03'),
+(4592, 1, 'Edito una Presentacion de Producto (UNIDAD)', '2020-09-25 15:25:18'),
+(4593, 1, 'Regristró un nuevo Producto (REMOLACHA)', '2020-09-25 15:27:02'),
+(4594, 1, 'Regristró una nueva Presentacion de Producto (LIBRA)', '2020-09-25 15:29:00'),
+(4595, 1, 'Inicio de Sección', '2020-09-25 15:32:29'),
+(4596, 1, 'Edito una Presentacion de Producto (LIBRA)', '2020-09-25 15:33:39'),
+(4597, 1, 'Edito una Presentacion de Producto (UNIDAD)', '2020-09-25 15:35:27'),
+(4598, 1, 'Regristró un nuevo Producto (PAN LA MELLA)', '2020-09-25 15:38:08'),
+(4599, 1, 'Regristró una nueva Presentacion de Producto (UNIDAD)', '2020-09-25 15:40:00'),
+(4600, 1, 'Regristró una nueva Presentacion de Producto (PAQUETE)', '2020-09-25 15:41:10'),
+(4601, 1, 'Edito una Presentacion de Producto (UNIDAD)', '2020-09-25 15:42:57'),
+(4602, 1, 'Edito una Presentacion de Producto (UNIDAD)', '2020-09-25 15:45:00'),
+(4603, 1, 'Regristró un nuevo Producto (TUNA DESMENUZADA EN ACEITE SOMERSET)', '2020-09-25 15:46:22'),
+(4604, 1, 'Regristró una nueva Presentacion de Producto (UNIDAD)', '2020-09-25 15:48:17'),
+(4605, 1, 'Regristró un nuevo Producto (MANTEQUILLA DE MANI PEANUT BUTTER)', '2020-09-25 15:49:14'),
+(4606, 1, 'Regristró una nueva Presentacion de Producto (UNIDAD)', '2020-09-25 15:50:06'),
+(4607, 1, 'Editó un Producto (MANTEQUILLA DE MANI PEANUT BUTTER 340G)', '2020-09-25 15:50:39'),
+(4608, 1, 'Edito una Presentacion de Producto (LIBRA)', '2020-09-25 15:52:00'),
+(4609, 1, 'Edito una Presentacion de Producto (LIBRA)', '2020-09-25 15:52:29'),
+(4610, 1, 'Edito una Presentacion de Producto (LIBRA)', '2020-09-25 15:53:20'),
+(4611, 1, 'Edito una Presentacion de Producto (LIBRA)', '2020-09-25 15:55:14'),
+(4612, 1, 'Regristró un nuevo Producto (PEPINO)', '2020-09-25 15:56:28'),
+(4613, 1, 'Regristró una nueva Presentacion de Producto (UNIDAD)', '2020-09-25 15:57:55'),
+(4614, 1, 'Edito una Presentacion de Producto (UNIDAD)', '2020-09-25 16:00:05'),
+(4615, 1, 'Edito una Presentacion de Producto (UNIDAD)', '2020-09-25 16:00:36'),
+(4616, 1, 'Se registro una venta', '2020-09-25 16:00:59'),
+(4617, 1, 'Regristró un nuevo Producto (LECHE CONDERSADA CARDINAL 393G)', '2020-09-25 16:03:56'),
+(4618, 1, 'Regristró una nueva Presentacion de Producto (UNIDAD)', '2020-09-25 16:05:15'),
+(4619, 1, 'Edito una Presentacion de Producto (UNIDAD)', '2020-09-25 16:07:07'),
+(4620, 1, 'Edito una Presentacion de Producto (CAJA)', '2020-09-25 16:11:06'),
+(4621, 1, 'Edito una Presentacion de Producto (SOBRE)', '2020-09-25 16:11:27'),
+(4622, 1, 'Regristró un nuevo Producto (ARROZ LA GINA)', '2020-09-25 16:13:31'),
+(4623, 1, 'Regristró una nueva Presentacion de Producto (LIBRA)', '2020-09-25 16:15:22'),
+(4624, 1, 'Regristró una nueva Presentacion de Producto (SACO)', '2020-09-25 16:18:03');
 
 -- --------------------------------------------------------
 
@@ -4266,6 +4377,10 @@ CREATE TABLE `payment_method` (
   `description` varchar(100) DEFAULT NULL,
   `state` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `payment_method`:
+--
 
 --
 -- Volcado de datos para la tabla `payment_method`
@@ -4298,6 +4413,12 @@ CREATE TABLE `presentation` (
   `limit_unit` int(11) DEFAULT NULL,
   `bar_code` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `presentation`:
+--   `id_product`
+--       `product` -> `id_product`
+--
 
 --
 -- Volcado de datos para la tabla `presentation`
@@ -4489,8 +4610,8 @@ INSERT INTO `presentation` (`id_presentation`, `id_product`, `num_hierarchy`, `f
 (237, 208, 2, 'CAJA', 1, 0, 145, 180, 155, 'files/images/presentations/47bdf760-433c-4dc3-8c9e-e2e3f88a43c2.jpg', 1, 0, '7702354252670b'),
 (238, 209, 1, 'UNIDAD', 1, 0, 12.08, 15, 13, 'files/images/presentations/8a4fac41-368c-445a-8401-c289e74f20cb.jpg', 1, 0, '7702354251796'),
 (239, 209, 2, 'PAQUETE', 12, 0, 140, 180, 155, 'files/images/presentations/ddbc16a9-fa8a-45eb-a13b-4cdbbb50834a.jpg', 1, 0, '7702354251796b'),
-(240, 210, 1, 'SOBRE', 1, 0, 21.25, 30, 22.08, 'files/images/presentations/49846acc-7c45-4348-b1af-154eba3e1cbe.jpg', 1, 0, '7460123437313'),
-(241, 210, 2, 'CAJA', 12, 0, 255, 360, 265, 'files/images/presentations/84f33614-9563-4a45-a400-39ebdb04da69.jpg', 1, 0, '7460123437320'),
+(240, 210, 1, 'SOBRE', 1, 0, 20.83, 30, 22.08, 'files/images/presentations/49846acc-7c45-4348-b1af-154eba3e1cbe.jpg', 1, 0, '7460123437313'),
+(241, 210, 2, 'CAJA', 12, 0, 250, 360, 265, 'files/images/presentations/84f33614-9563-4a45-a400-39ebdb04da69.jpg', 1, 0, '7460123437320'),
 (242, 211, 1, 'UNIDAD', 1, 0, 24, 30, 26, 'files/images/presentations/9280f3ff-b270-486e-98f2-e368881cc1cf.jpg', 1, 0, '787545261485'),
 (243, 211, 2, 'CAJA', 24, 0, 575, 720, 624, 'files/images/presentations/7dc8c7a7-02b2-4fa4-a464-42a7ec83f3be.jpg', 1, 0, '10787545261482'),
 (244, 212, 1, 'UNIDAD', 1, 0, 13, 30, 14, 'files/images/presentations/3e31b68d-6f75-48f2-9c98-e40b8028eea5.jpg', 1, 0, '7411000345351'),
@@ -4798,7 +4919,7 @@ INSERT INTO `presentation` (`id_presentation`, `id_product`, `num_hierarchy`, `f
 (545, 414, 1, 'UNIDAD', 1, 0, 106, 135, 0, 'files/images/presentations/2976a6f3-170a-4c2b-8309-361422b5a991.jpg', 1, 0, '751685000020'),
 (546, 415, 1, 'UNIDAD', 1, 0, 54, 75, 65, 'files/images/presentations/63cb7ffb-a614-4471-9f98-4cc382a60f65.jpg', 1, 0, '760593023182'),
 (547, 416, 1, 'UNIDAD', 1, 0, 33, 45, 40, 'files/images/presentations/c2fd3f54-fc22-4530-9e23-2c13945abcf5.jpg', 1, 0, '760593023892'),
-(548, 417, 1, 'UNIDAD', 1, 0, 52.08, 60, 55, 'files/images/presentations/f26726ff-25b7-4910-a991-f507c179bf65.jpg', 1, 0, '760593023908'),
+(548, 417, 1, 'UNIDAD', 1, 0, 53, 63, 56, 'files/images/presentations/f26726ff-25b7-4910-a991-f507c179bf65.jpg', 1, 0, '760593023908'),
 (549, 418, 1, 'UNIDAD', 1, 0, 29, 40, 35, 'files/images/presentations/069422e1-1032-4c31-b214-6ff128a7a7e4.jpg', 1, 0, '8003058030021'),
 (550, 419, 1, 'UNIDAD', 1, 0, 30, 40, 35, 'files/images/presentations/8d175c2a-cfee-458c-81c1-e02fb883eab5.jpg', 1, 0, '751685000587'),
 (551, 420, 1, 'UNIDAD', 1, 0, 75, 95, 80, 'files/images/presentations/c9ae1e21-23c6-4c44-9f5e-022981a75bda.jpg', 1, 0, '760593023878'),
@@ -5065,22 +5186,22 @@ INSERT INTO `presentation` (`id_presentation`, `id_product`, `num_hierarchy`, `f
 (811, 609, 2, 'PIEZA', 1, 0, 99, 130, 0, 'files/images/presentations/b021fea0-e766-4632-ae10-a86c710312a3.jpg', 1, 0, '7467678000689'),
 (812, 610, 1, 'UNIDAD', 1, 0, 6, 10, 0, 'files/images/presentations/770be0a9-6bf5-477f-b62b-1cb09cbad0aa.jpg', 1, 0, '20817164115'),
 (813, 610, 2, 'PAQUETE', 60, 0, 360, 480, 400, 'files/images/presentations/3107d583-8206-4920-8e01-d47145c90d79.jpg', 1, 0, '7468086901001'),
-(814, 611, 1, 'LIBRA', 1, 0, 0, 220, 200, 'files/images/presentations/ba9f42c3-d0d4-43ba-9693-8994b725fa07.jpg', 1, 0, '20817164645vegetal'),
+(814, 611, 1, 'LIBRA', 1, 0, 165, 220, 200, 'files/images/presentations/ba9f42c3-d0d4-43ba-9693-8994b725fa07.jpg', 1, 0, '20817164645vegetal'),
 (815, 612, 1, 'LIBRA', 1, 0, 150, 220, 0, 'files/images/presentations/d4f3114e-c4b4-477b-b078-2232be3eba7b.jpg', 1, 0, '20817164932vegetal'),
 (816, 613, 1, 'LIBRA', 1, 0, 0, 0, 0, 'files/images/presentations/97279cd5-6918-4abe-ab42-ad1e0257196e.jpg', 1, 0, '20817165057vegetal'),
-(817, 614, 1, 'LIBRA', 1, 0, 60, 80, 0, 'files/images/presentations/42959050-66be-4ad9-a4c9-2eba6ead7262.jpg', 1, 0, '20817165245vegetal'),
+(817, 614, 1, 'LIBRA', 1, 0, 42, 65, 55, 'files/images/presentations/42959050-66be-4ad9-a4c9-2eba6ead7262.jpg', 1, 0, '20817165245vegetal'),
 (818, 615, 1, 'UNIDAD', 1, 0, 5.5, 10, 0, 'files/images/presentations/1dacc85e-4216-479e-ab25-7813dc6c0e72.jpg', 1, 0, '796025000025'),
 (819, 615, 2, 'PAQUETE', 20, 0, 110, 200, 130, 'files/images/presentations/1f70bd07-5f3b-4a49-8405-051e23a2f13a.jpg', 1, 0, '20817165718'),
 (820, 616, 1, 'LIBRA', 1, 0, 25, 35, 35, 'files/images/presentations/f78da041-e93c-44f8-a91c-574d3c1f6606.jpg', 1, 0, '20817174032vegetal'),
-(821, 617, 1, 'LIBRA', 1, 0, 25, 35, 35, 'files/images/presentations/57a73ebc-e92a-4add-b8f4-fa38e9722a99.jpg', 1, 0, '20817174944vegetal'),
+(821, 617, 1, 'LIBRA', 1, 0, 45, 65, 55, 'files/images/presentations/57a73ebc-e92a-4add-b8f4-fa38e9722a99.jpg', 1, 0, '20817174944vegetal'),
 (822, 618, 1, 'LIBRA', 1, 0, 20, 30, 0, 'files/images/presentations/f1d865a2-7e92-48ef-b06f-112c822f04ca.jpg', 1, 0, '20817175205vegetal'),
 (823, 619, 1, 'LIBRA', 1, 0, 25, 45, 0, 'files/images/presentations/feae76c4-4a30-4a61-8827-e6ba90999c67.jpg', 1, 0, '20817175430vegetal'),
 (824, 620, 1, 'UNIDAD', 1, 0, 3, 5, 0, 'files/images/presentations/b12116f8-f64e-4712-a5f2-e9d0b4064cc2.jpg', 1, 0, '20817175709fruta'),
 (825, 621, 1, 'LIBRA', 1, 0, 20, 35, 0, 'files/images/presentations/f30079a4-c585-454a-9723-cf16a13cba73.jpg', 1, 0, '20817175859vegetal'),
-(826, 622, 1, 'LIBRA', 1, 0, 35, 50, 0, 'files/images/presentations/40baaaa7-0066-416a-9274-07a1670ae8d6.jpg', 1, 0, '20817180028vegetal'),
-(827, 623, 1, 'LIBRA', 1, 0, 30, 50, 0, 'files/images/presentations/c163805c-66b8-44e8-afe1-4986ad8b79a7.jpg', 1, 0, '20817180907vegetal'),
+(826, 622, 1, 'UNIDAD', 1, 0, 30, 50, 0, 'files/images/presentations/40baaaa7-0066-416a-9274-07a1670ae8d6.jpg', 1, 0, '20817180028vegetal'),
+(827, 623, 1, 'LIBRA', 1, 0, 40, 60, 0, 'files/images/presentations/c163805c-66b8-44e8-afe1-4986ad8b79a7.jpg', 1, 0, '20817180907vegetal'),
 (828, 624, 1, 'UNIDAD', 1, 0, 7, 15, 0, 'files/images/presentations/14175f9d-3066-4066-bd15-577721cda761.png', 1, 0, '20817181413fruta'),
-(829, 625, 1, 'LIBRA', 0, 0, 5, 8, 0, 'files/images/presentations/3404d245-ee8c-4e23-a6d3-776bd8a9b7ec.jpg', 1, 0, '20817181653vegetal'),
+(829, 625, 1, 'LIBRA', 0, 0, 7, 10, 0, 'files/images/presentations/3404d245-ee8c-4e23-a6d3-776bd8a9b7ec.jpg', 1, 0, '20817181653vegetal'),
 (830, 626, 1, 'UNIDAD', 1, 0, 3, 5, 0, 'files/images/presentations/ffc00e60-350d-4099-872c-4866adb090d4.jpg', 1, 0, '20817183414fruta'),
 (831, 627, 1, 'UNIDAD', 1, 0, 8, 10, 0, 'files/images/presentations/be795315-b2a8-43f7-a840-4cc145ab1654.jpg', 1, 0, '20817184042vegetal'),
 (832, 628, 1, 'UNIDAD', 1, 0, 159, 200, 185, 'files/images/presentations/615beae4-26fb-4b00-9cc0-3f6f10cf75d8.jpg', 1, 0, '7460193703981'),
@@ -5089,7 +5210,7 @@ INSERT INTO `presentation` (`id_presentation`, `id_product`, `num_hierarchy`, `f
 (835, 630, 1, 'UNIDAD', 1, 0, 12.5, 15, 0, 'files/images/presentations/a5230fb7-9c97-40ee-b399-7bdfa7904f1b.jpg', 1, 0, '049000181227'),
 (836, 630, 2, 'PAQUETE', 12, 0, 150, 180, 160, 'files/images/presentations/product.png', 1, 0, '20817191721'),
 (837, 631, 1, 'LIBRA', 1, 0, 20, 30, 24, 'files/images/presentations/2ddbe09e-6124-4561-b428-365b2fc293c7.jpg', 1, 0, '20817192011vegetal'),
-(838, 632, 1, 'UNIDAD', 1, 0, 30, 40, 0, 'files/images/presentations/f090b17e-445e-4770-9eca-373eceb4018b.jpg', 1, 0, '20817192121fruta'),
+(838, 632, 1, 'UNIDAD', 1, 0, 35, 50, 0, 'files/images/presentations/f090b17e-445e-4770-9eca-373eceb4018b.jpg', 1, 0, '20817192121fruta'),
 (839, 633, 1, 'LIBRA', 1, 0, 25, 40, 0, 'files/images/presentations/7d95a2f3-8b1d-41fd-9130-dd06c5d7d671.jpg', 1, 0, '20817192228vegetal'),
 (840, 634, 1, 'LIBRA', 1, 0, 20, 30, 0, 'files/images/presentations/ac5b799c-6939-460c-b44a-2d482d39c019.jpg', 1, 0, '20817192345vegetal'),
 (841, 635, 1, 'UNIDAD', 1, 0, 6, 10, 0, 'files/images/presentations/8fbe3b32-6437-453b-b477-327ff7b97434.jpg', 1, 0, '20817192513fruta'),
@@ -5112,7 +5233,7 @@ INSERT INTO `presentation` (`id_presentation`, `id_product`, `num_hierarchy`, `f
 (858, 648, 1, 'UNIDAD', 1, 0, 2, 5, 0, 'files/images/presentations/product.png', 1, 0, '2081805421'),
 (859, 648, 2, 'PAQUETE', 25, 0, 50, 125, 75, 'files/images/presentations/product.png', 1, 0, '2081805829'),
 (860, 649, 1, 'LIBRA', 1, 0, 8, 15, 0, 'files/images/presentations/eeb3b92a-0d9e-4ba6-a554-3efa0226fe6d.jpg', 1, 0, '25'),
-(861, 650, 1, 'UNIDAD', 1, 0, 8, 10, 0, 'files/images/presentations/41233b9a-f5f1-41b5-ac4b-ea5cc12e0fe9.jpg', 1, 0, '26'),
+(861, 650, 1, 'UNIDAD', 1, 0, 9, 13, 0, 'files/images/presentations/41233b9a-f5f1-41b5-ac4b-ea5cc12e0fe9.jpg', 1, 0, '26'),
 (862, 652, 1, 'UNIDAD', 1, 0, 34, 5, 0, 'files/images/presentations/660c6888-a795-4161-8068-8e0406156845.jpg', 1, 0, '7465464557188'),
 (863, 652, 2, 'PAQUETE', 50, 0, 170, 250, 190, 'files/images/presentations/a511ab37-7dcf-4bfd-b6de-a10a76f14f0b.png', 1, 0, '2081811458'),
 (864, 653, 1, 'UNIDAD', 1, 0, 2.75, 5, 3.16, 'files/images/presentations/61308619-b9f5-40ff-8ec6-3f8db08a295f.png', 1, 0, '90'),
@@ -5155,7 +5276,7 @@ INSERT INTO `presentation` (`id_presentation`, `id_product`, `num_hierarchy`, `f
 (901, 681, 1, 'PAQUETE', 1, 0, 79, 100, 0, 'files/images/presentations/product.png', 1, 0, '2050001123817'),
 (902, 682, 1, 'PAQUETE', 1, 0, 35, 45, 45, 'files/images/presentations/product.png', 1, 0, '7423382500112'),
 (903, 683, 1, 'UNIDAD', 1, 0, 10.34, 15, 0, 'files/images/presentations/product.png', 1, 0, '75044466'),
-(904, 684, 1, 'UNIDAD', 1, 0, 7, 10, 0, 'files/images/presentations/product.png', 1, 0, '2083154447'),
+(904, 684, 1, 'UNIDAD', 1, 0, 7, 10, 0, 'files/images/presentations/5865030.649386763.jpg', 1, 0, '2083154447'),
 (905, 685, 1, 'UNIDAD', 1, 0, 54, 70, 0, 'files/images/presentations/product.png', 1, 0, '7509546003108'),
 (908, 686, 1, 'UNIDAD', 1, 0, 0.5, 1, 1, 'files/images/presentations/product.png', 1, 0, '20831183548'),
 (909, 687, 1, '1', 1, 0, 38, 60, 48, 'files/images/presentations/product.png', 1, 0, '7460352122394'),
@@ -5203,7 +5324,17 @@ INSERT INTO `presentation` (`id_presentation`, `id_product`, `num_hierarchy`, `f
 (951, 730, 1, 'UNIDAD', 1, 0, 0, 25, 0, 'files/images/presentations/product.png', 1, 0, '7460000025039'),
 (952, 731, 1, 'UNIDAD', 1, 0, 6.66, 10, 0, 'files/images/presentations/product.png', 1, 0, '7461063094345'),
 (953, 731, 2, 'PAQUETE', 12, 0, 80, 120, 90, 'files/images/presentations/product.png', 1, 0, '2091304750'),
-(954, 732, 1, 'CAJA', 24, 0, 90, 120, 100, 'files/images/presentations/427141bf-db4a-450d-93c2-5a831a430b7b.jpg', 1, 0, '2092360406');
+(954, 732, 1, 'CAJA', 24, 0, 90, 120, 100, 'files/images/presentations/427141bf-db4a-450d-93c2-5a831a430b7b.jpg', 1, 0, '2092360406'),
+(955, 733, 1, 'LIBRA', 1, 0, 18, 30, 0, 'files/images/presentations/328287.97556756804.jpg', 1, 0, '2092503842'),
+(956, 734, 1, 'LIBRA', 1, 0, 20, 30, 0, 'files/images/presentations/171307.4965663384.jpg', 1, 0, '2092532808'),
+(957, 735, 1, 'UNIDAD', 1, 0, 3, 5, 0, 'files/images/presentations/product.png', 1, 0, '2092533918'),
+(958, 735, 2, 'PAQUETE', 20, 0, 60, 100, 80, 'files/images/presentations/product.png', 1, 0, '2092534028'),
+(959, 736, 1, 'UNIDAD', 1, 0, 50, 65, 58, 'files/images/presentations/product.png', 1, 0, '2050001181497'),
+(960, 737, 1, 'UNIDAD', 1, 0, 112, 150, 0, 'files/images/presentations/product.png', 1, 0, '7465309986760'),
+(961, 738, 1, 'UNIDAD', 1, 0, 8, 15, 15, 'files/images/presentations/745542.0366233102.jpg', 1, 0, '2092535704'),
+(962, 739, 1, 'UNIDAD', 1, 0, 93.75, 125, 110, 'files/images/presentations/product.png', 1, 0, '7751271024099'),
+(963, 740, 1, 'LIBRA', 1, 0, 19.88, 25, 23, 'files/images/presentations/product.png', 1, 0, '2092541417'),
+(964, 740, 2, 'SACO', 125, 0, 2485, 3000, 2875, 'files/images/presentations/product.png', 1, 0, '2092541718');
 
 -- --------------------------------------------------------
 
@@ -5217,6 +5348,10 @@ CREATE TABLE `product` (
   `state` tinyint(1) NOT NULL,
   `id_branch_office` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `product`:
+--
 
 --
 -- Volcado de datos para la tabla `product`
@@ -5833,7 +5968,15 @@ INSERT INTO `product` (`id_product`, `name`, `state`, `id_branch_office`) VALUES
 (729, 'LECHE CARNETION DE CAJA PEQUEÑA', 1, 1),
 (730, 'RATAX 20G', 1, 1),
 (731, 'AGUA COOL HEAVEN 16.9OZ', 1, 1),
-(732, 'CAJA BIZCOCHO DE 5', 1, 1);
+(732, 'CAJA BIZCOCHO DE 5', 1, 1),
+(733, 'AUYAMA', 1, 1),
+(734, 'REMOLACHA', 1, 1),
+(735, 'PAN LA MELLA', 1, 1),
+(736, 'TUNA DESMENUZADA EN ACEITE SOMERSET', 1, 1),
+(737, 'MANTEQUILLA DE MANI PEANUT BUTTER 340G', 1, 1),
+(738, 'PEPINO', 1, 1),
+(739, 'LECHE CONDERSADA CARDINAL 393G', 1, 1),
+(740, 'ARROZ LA GINA', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -5856,6 +5999,20 @@ CREATE TABLE `sales` (
   `state_sales` tinyint(1) DEFAULT NULL,
   `id_branch_office` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `sales`:
+--   `id_employe`
+--       `employe` -> `id_employe`
+--   `id_customer`
+--       `customer` -> `id_customer`
+--   `id_type_sale`
+--       `type_sales` -> `id_type_sale`
+--   `id_payment_method`
+--       `payment_method` -> `id_payment_method`
+--   `id_branch_office`
+--       `branch_offices` -> `id_branch_offices`
+--
 
 --
 -- Volcado de datos para la tabla `sales`
@@ -6042,7 +6199,8 @@ INSERT INTO `sales` (`id_sale`, `code_sale`, `id_employe`, `id_customer`, `id_ty
 (716, '5103602468536626616', 1, 1, 2, '62', 1, '2020-09-13', '12:59:41', 1, '740', 1, 1),
 (717, '5587317710639285810', 1, 1, 2, '70', 1, '2020-09-13', '13:45:56', 1, '750', 1, 1),
 (722, '4650647200449338704', 1, 1, 2, '0', 0, '2020-09-23', '17:47:48', 1, '0', 0, 1),
-(725, '4721578907571423630', 1, 1, 2, '513', 1, '2020-09-23', '18:23:50', 1, '1010', 1, 1);
+(725, '4721578907571423630', 1, 1, 2, '513', 1, '2020-09-23', '18:23:50', 1, '1010', 1, 1),
+(728, '5231281442068995596', 1, 1, 2, '508', 1, '2020-09-25', '14:47:40', 1, '1260', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -6057,6 +6215,14 @@ CREATE TABLE `sales_detail` (
   `discount` double DEFAULT NULL,
   `id_presentation` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `sales_detail`:
+--   `id_sale`
+--       `sales` -> `id_sale`
+--   `id_presentation`
+--       `presentation` -> `id_presentation`
+--
 
 --
 -- Volcado de datos para la tabla `sales_detail`
@@ -7615,7 +7781,13 @@ INSERT INTO `sales_detail` (`id_sales_detail`, `id_sale`, `stock`, `discount`, `
 (16228, 725, 24, 0, 487),
 (16229, 725, 1, 0, 664),
 (16230, 725, 2, 0, 814),
-(16231, 725, 120, 0, 908);
+(16231, 725, 120, 0, 908),
+(16232, 728, 24, 0, 499),
+(16233, 728, 24, 0, 487),
+(16234, 728, 1, 0, 666),
+(16235, 728, 1, 0, 664),
+(16236, 728, 2, 0, 814),
+(16237, 728, 2, 0, 817);
 
 -- --------------------------------------------------------
 
@@ -7633,6 +7805,14 @@ CREATE TABLE `shopping` (
   `id_branch_office` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- RELACIONES PARA LA TABLA `shopping`:
+--   `id_employe`
+--       `employe` -> `id_employe`
+--   `id_branch_office`
+--       `branch_offices` -> `id_branch_offices`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -7649,6 +7829,14 @@ CREATE TABLE `shopping_detail` (
   `price_2` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- RELACIONES PARA LA TABLA `shopping_detail`:
+--   `id_product`
+--       `product` -> `id_product`
+--   `id_shopping`
+--       `shopping` -> `id_shopping`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -7660,6 +7848,10 @@ CREATE TABLE `type_sales` (
   `name` varchar(100) NOT NULL,
   `description` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `type_sales`:
+--
 
 --
 -- Volcado de datos para la tabla `type_sales`
@@ -7858,7 +8050,7 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT de la tabla `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4574;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4625;
 
 --
 -- AUTO_INCREMENT de la tabla `payment_method`
@@ -7870,25 +8062,25 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT de la tabla `presentation`
 --
 ALTER TABLE `presentation`
-  MODIFY `id_presentation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=955;
+  MODIFY `id_presentation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=965;
 
 --
 -- AUTO_INCREMENT de la tabla `product`
 --
 ALTER TABLE `product`
-  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=733;
+  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=741;
 
 --
 -- AUTO_INCREMENT de la tabla `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id_sale` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=728;
+  MODIFY `id_sale` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=731;
 
 --
 -- AUTO_INCREMENT de la tabla `sales_detail`
 --
 ALTER TABLE `sales_detail`
-  MODIFY `id_sales_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16232;
+  MODIFY `id_sales_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16238;
 
 --
 -- AUTO_INCREMENT de la tabla `shopping`
