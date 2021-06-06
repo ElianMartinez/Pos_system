@@ -37,7 +37,6 @@ app.listen(app.get('port'), () => {
 //         where: {'customer': '','product':'','presentation':'','logs':''}, // Only test players with id < 1000
 //         ifNotExist:true, // Create table if not exist
 //     }).then(dump => {
-        
 //         fs.writeFileSync('./backup/test.sql', dump); // Create data.sql file with dump result
     
 //     })
