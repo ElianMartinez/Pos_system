@@ -1,33 +1,30 @@
-const express =  require('express');
-const fileUpload = require('express-fileupload');
+const express = require("express");
+const fileUpload = require("express-fileupload");
 
 const app = express();
 
-//settings 
+//settings
 app.set("port", 5500);
-//Middlewares 
+//Middlewares
 app.use(express.json());
 app.use(fileUpload());
-    
-//Routes 
-app.use("/files",express.static(__dirname + '/public'));
-app.use(require('./routes/route'));
- 
+
+//Routes
+app.use("/files", express.static(__dirname + "/public"));
+app.use(require("./routes/route"));
+
 //Starting server
-app.listen(app.get('port'), () => {
-    console.log("server on port 5500");
+app.listen(app.get("port"), () => {
+  console.log("server on port 5500");
 });
-
-
-
 
 // const mysqlDump = require('mysql-backup');
 // const fs = require('fs');
 // const cron = require('node-cron');
 // var a = 0;
 // cron.schedule('* 10 * * 7-7',() => {
-    
-//     mysqlDump({ 
+
+//     mysqlDump({
 //         host: 'localhost',
 //         user: 'root',
 //         password: '',
@@ -37,7 +34,6 @@ app.listen(app.get('port'), () => {
 //         ifNotExist:true, // Create table if not exist
 //     }).then(dump => {
 //         fs.writeFileSync('./backup/test.sql', dump); // Create data.sql file with dump result
-    
+
 //     })
 // })
-
