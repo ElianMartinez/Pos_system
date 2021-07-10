@@ -9,6 +9,7 @@ const salesRouter = require('./sales');
 const customerRouter = require('./customer'); 
 const deudaRouter = require('./deuda'); 
 
+console.log("hay algo aqui");
 router.get('/', (req,res) => {
     res.json({
         res:"ok",
@@ -27,3 +28,6 @@ router.use('/deuda',deudaRouter);
 
 
 module.exports = router;
+
+// create a server
+        
