@@ -117,6 +117,29 @@ const CreatePresenta = async (req, res) => {
   }
 };
 
+const Update_Barcode = async (req, res) => {
+  if (req.body != null) {
+  
+    const resp = await productModel.Update_Barcode(req.body);
+    if (resp) {
+     return res.json({
+        res: "true",
+        data: "Todo Listo",
+      });
+    } else {
+    return res.json({
+        res: "error",
+        data: "no se actualizo",
+      });
+    }
+  } else {
+    res.json({
+      res: "No llego",
+      data: "aqui no hay datos",
+    });
+  }
+};
+
 const EditPresenta = async (req, res) => {
   if (req.body != null) {
     //entrada de datos
@@ -138,7 +161,7 @@ const EditPresenta = async (req, res) => {
 
     //trabajar la imagen
     if (req.files != null) {
-      let sampleFile = req.files.file;
+      let sampleFile = req.files.file; 
 
       let nombrefile =
         getRandomArbitrary(1, 9999999) + path.extname(sampleFile.name);
@@ -286,7 +309,6 @@ const ShowProductosBycode = async (req, res) => {
   if (codigo != null) {
     var resul = await productModel.BuscarPresent(codigo);
     if (resul[0] == null || resul[0] == "") {
-
       res.json({
         res: "false",
         data: "No existe ese codigo de barras",
@@ -317,4 +339,5 @@ module.exports = {
   buscarProducts,
   EditPresenta,
   ShowProductosBycode,
+  Update_Barcode
 };

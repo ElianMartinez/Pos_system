@@ -144,12 +144,18 @@ module.exports = class ProductModel {
     }
   }
 
-  async Update(data) {
-    //Update
-  }
-
-  async Delete(data) {
-    //ELiminar
+  async Update_Barcode(data) {
+    var sql = `call update_barcode('${data.codigo_barra}',${data.Id_Presentation})`;
+    try {
+      var response = await bd.query(sql);
+      if (response.affectedRows === 1) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async ediProduc(data) {
